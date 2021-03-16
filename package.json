@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "start": "node app.js",
+    "start": "node src/server.js",
     "test": "mocha"
   },
   "dependencies": {
