@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
+const { NODE_ENV } = require('./config');
 
 const app = express();
 
@@ -16,7 +17,7 @@ app.get('/', (req, res) => {
 
 app.use((error, req, res, next) => {
   let response;
-  if (process.env.NODE_ENV === 'production') {
+  if (NODE_ENV === 'production') {
     response = { error: { message: 'server error' } };
   } else {
     console.error(error);
