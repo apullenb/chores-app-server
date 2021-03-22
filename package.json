@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "start": "node src/server.js",
+    "start": "node server.js",
     "migrate": "postgrator --config postgrator-config.js",
     "test": "mocha"
   },
