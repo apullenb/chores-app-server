@@ -7,7 +7,7 @@ const SuperService = {
   },
 
   addNewChore(knex, newEntry){
-    console.log(newEntry)
+    console.log(newEntry);
     return knex
       .insert(newEntry)
       .into('chore_options')
