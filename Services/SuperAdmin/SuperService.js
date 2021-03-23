@@ -16,7 +16,11 @@ const SuperService = {
         return rows[0];
       });
   },
-
+  getAllParentAccts(knex) {
+    return knex
+      .select('*')
+      .from('parent_admin');
+  },
 };
 
 

@@ -11,7 +11,18 @@ const authorization = require('../../utilities/authorization');
 
 //Super User Login
 
+// Get All Parent Accounts
 
+superRouter.get('/parents', async (req, res) => {
+  try {
+      const parents = await Services.getAllParentAccts(req.app.get('db'));
+      res.json(parents)
+  }
+  catch {
+      console.error('error')
+      res.status(500).json('Server Error')
+  }
+})
 // Get All Pre-Defined Chores
 
 superRouter.get('/chores', async (req, res) => {
