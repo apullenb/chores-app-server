@@ -44,8 +44,16 @@ const Services= {
       .select('*')
       .from('children')
       .where('family_id', id);
-  }
+  },
 
+  insertNewChore(knex, chore) {
+
+  },
+  
+  assignChoresToChild(knex, id) {
+
+  }
 };
+
 
 module.exports = Services;

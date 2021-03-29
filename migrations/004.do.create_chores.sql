@@ -5,11 +5,11 @@ CREATE TABLE IF NOT EXISTS chores
  value       int NOT NULL,
  steps       text NOT NULL,
  photo       text NOT NULL,
- family_id   int NOT NULL,
+ family_id   int NULL,
  description text NOT NULL,
  time        int NOT NULL,
  complete    boolean NOT NULL,
- child_id    int NOT NULL,
+ child_id    int NULL,
  CONSTRAINT PK_chores PRIMARY KEY ( chore_id ),
  CONSTRAINT FK_49 FOREIGN KEY ( family_id ) REFERENCES parent_admin ( family_id ),
  CONSTRAINT FK_67 FOREIGN KEY ( child_id ) REFERENCES children ( child_id )
