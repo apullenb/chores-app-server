@@ -2,13 +2,11 @@ const bcrypt = require('bcrypt');
 
 const Services= {
 
-  getAllUsers(knex) {
-    return knex.select('*').from('users');
-  },
+ 
 
   checkForUser(knex, username) {
     return knex
-      .from('users')
+      .from('parent_username')
       .select('*')
       .where('username', username)
       .first();
@@ -26,13 +24,13 @@ const Services= {
   getById(knex, id) {
     return knex
       .select('*')
-      .from('users')
-      .where('user_id', id)
+      .from('parent_admin')
+      .where('parent_user_id', id)
       .first();
   },
 
   getUserWithUserName(db, username) {
-    return db('users')
+    return db('parent_admin')
       .where({ username })
       .first();
   },
