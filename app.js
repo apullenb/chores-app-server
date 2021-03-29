@@ -5,7 +5,8 @@ const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
 const superRouter = require('./Services/SuperAdmin/SuperRoutes');
-const parentRouter = require('./Services/users/parent/parentRoutes')
+const parentRouter = require('./Services/users/parent/parentRoutes');
+const childRouter = require('./Services/users/child/childRoutes');
 
 const app = express();
 
@@ -18,7 +19,7 @@ app.use(cors());
 
 app.use('/api/superAdmin', superRouter);
 app.use('/api/parent', parentRouter);
-
+app.use('/api/child', childRouter);
 app.use((error, req, res, next) => {
   let response;
   if (NODE_ENV === 'production') {

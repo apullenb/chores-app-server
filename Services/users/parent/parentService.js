@@ -6,9 +6,9 @@ const Services= {
 
   checkForUser(knex, username) {
     return knex
-      .from('parent_username')
+      .from('parent_admin')
       .select('*')
-      .where('username', username)
+      .where('parent_username', username)
       .first();
   },
   
