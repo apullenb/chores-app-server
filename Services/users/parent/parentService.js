@@ -34,8 +34,18 @@ const Services= {
       .where({ username })
       .first();
   },
+
   comparePasswords(password, hash) {
     return bcrypt.compare(password, hash);
   },
+
+  getAllChildrenOfParent(knex, id) {
+    return knex
+      .select('*')
+      .from('children')
+      .where('family_id', id);
+  }
+
 };
+
 module.exports = Services;

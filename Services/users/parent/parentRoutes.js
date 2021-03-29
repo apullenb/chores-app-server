@@ -29,6 +29,47 @@ parentRouter
   .catch(next);
 });
 
+// Parent Log-in
+parentRouter
+.post('/login', jsonParser, async (req, res, next) => {
+    const {parent_username, password } = req.body;
+    const loginUser = {parent_username, password };
+    for (const [key, value] of Object.entries(loginUser))
+      if (value == null)
+        return res.status(400).json({
+          error: `Missing '${key}' in request body`
+        });
+   const searchUsers = await Services.getUserWithUserName(req.app.get('db'), loginUser.parent_username)
+      if (searchUsers === undefined) {
+          return res.status(400).json({
+            error: 'Incorrect username or password',
+          });
+        }
+    
+        return Services.comparePasswords(loginUser.password, searchUsers.password)
+          .then(compareMatch => {
+            if (!compareMatch) {
+              return res.status(400).json({
+                error: 'Incorrect username or password',
+              })
+            }
+        
+            const token =  jwtGenerator(searchUsers.parent_user_id)
+            res.json({token}) 
+      })
+      .catch(next);
+  });
 
+  //Return all children in a family
+  parentRouter
+  .get('/children', authorization, async (req, res) => { 
+    try {
+       const user = await Services.getAllChildrenOfParent(req.app.get('db'), req.family_id)
+       res.json(user)
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json('server error');
+    }
+  })
 
 module.exports = parentRouter;
