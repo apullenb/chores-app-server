@@ -5,6 +5,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
 const superRouter = require('./Services/SuperAdmin/SuperRoutes');
+const parentRouter = require('./Services/users/parent/parentRoutes')
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(cors());
 //Routes:
 
 app.use('/api/superAdmin', superRouter);
+app.use('/api/parent', parentRouter);
 
 app.use((error, req, res, next) => {
   let response;
