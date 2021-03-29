@@ -12,6 +12,10 @@ const Services= {
       .first();
   },
 
+  comparePasswords(password, hash) {
+    return bcrypt.compare(password, hash);
+  },
+
   insertChildUser(knex, full_name, username, user_type, family_id, age, gender, tokens, password) {
     return knex
       .insert({full_name, username, user_type, family_id, age, gender, tokens, password})
@@ -22,6 +26,12 @@ const Services= {
       });
   },
 
+  getAssignedChores(knex, id) {
+    return knex
+      .select('*')
+      .from('chores')
+      .where('child_id', id);
+  }
 };
 
 
