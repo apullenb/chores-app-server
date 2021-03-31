@@ -31,7 +31,7 @@ const Services= {
 
   getUserWithUserName(db, username) {
     return db('parent_admin')
-      .where({ username })
+      .where('parent_username', username)
       .first();
   },
 

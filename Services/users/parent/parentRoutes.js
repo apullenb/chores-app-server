@@ -3,10 +3,10 @@ const path = require('path');
 const xss = require('xss');
 const Services = require('./parentService');
 const bcrypt = require('bcrypt');
-const jwtGenerator = require('../../utilities/jwtGenerator');
+const jwtGenerator = require('../../../utilities/jwtGenerator');
 const jsonParser = express.json();
 const parentRouter = express.Router();
-const authorization = require('../../utilities/authorization');
+const authorization = require('../../../utilities/authorization');
 
    
 // New Parent Registration
