@@ -13,9 +13,10 @@ const authorization = require('../../../utilities/authorization');
 // Request body - must get family_id from local storage token and add to the request body before sending request. Also,send token value of 0
 
 childRouter
-.post('/register', jsonParser, async (req, res, next) => {
-    
-    const { full_name, username, user_type, family_id, age, gender, tokens, password} = req.body;
+.post('/register', jsonParser, authorization, async (req, res, next) => {
+    const { full_name, username, user_type, age, gender, tokens, password} = req.body;
+    console.log(req.family)
+    const family_id = req.family
     const newUser = {full_name, username, user_type, family_id, age, gender, tokens, password};
     const users = await Services.checkForUser(req.app.get('db'), newUser.username)
         if (users) {

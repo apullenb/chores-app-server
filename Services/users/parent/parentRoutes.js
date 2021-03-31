@@ -23,8 +23,8 @@ parentRouter
   const saltRound = 2
   const salt = await bcrypt.genSalt(saltRound)
   const bcryptPassword = await bcrypt.hash(password, salt)
-  const addUser = await Services.insertParentUser(req.app.get('db'), newUser.parent_name, newUser.user_type, newUser.family_last_name, newUser.parent_username, bcryptPassword); 
-  const token =  jwtGenerator(addUser[0].parent_user_id)
+  const addUser = await Services.insertParentUser(req.app.get('db'), newUser.parent_name, newUser.parent_username, newUser.user_type, newUser.family_last_name, bcryptPassword); 
+  const token =  jwtGenerator(addUser[0].parent_user_id, addUser[0].family_id)
        res.json({token})     
   .catch(next);
 });
@@ -75,8 +75,10 @@ parentRouter
   parentRouter
   .get('/children', authorization, async (req, res) => { 
     try {
-       const user = await Services.getAllChildrenOfParent(req.app.get('db'), req.family_id)
-       res.json(user)
+       const user = await Services.getById(req.app.get('db'), req.user)
+       const children = await Services.getAllChildrenOfParent(req.app.get('db'), user.family_id)
+       console.log(children)
+       res.json(children)
     } catch (err) {
         console.error(err.message);
         res.status(500).json('server error');
