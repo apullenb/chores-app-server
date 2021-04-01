@@ -60,16 +60,16 @@ parentRouter
       .catch(next);
   });
 
-  // parentRouter
-  // .get("/", authorization, (req, res, next) => {
-  //   const id = req.user;
-  //   const knexInstance = req.app.get("db");
-  //   Services.getUserDash(knexInstance, id)
-  //     .then((user) => {
-  //       res.json(user);
-  //     })
-  //     .catch(next);
-  // });
+  parentRouter
+  .get("/", authorization, (req, res, next) => {
+    const id = req.user;
+    const knexInstance = req.app.get("db");
+    Services.getById(knexInstance, id)
+      .then((user) => {
+        res.json(user);
+      })
+      .catch(next);
+  });
 
   //Return all children in a family
   parentRouter
