@@ -29,8 +29,10 @@ const Services= {
       .first();
   },
 
-  getUserWithUserName(db, username) {
-    return db('parent_admin')
+  getUserWithUserName(knex, username) {
+    return knex
+      .select('*')
+      .from('parent_admin')
       .where('parent_username', username)
       .first();
   },

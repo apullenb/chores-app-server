@@ -53,8 +53,8 @@ parentRouter
                 error: 'Incorrect username or password',
               })
             }
-        
-            const token =  jwtGenerator(searchUsers.parent_user_id)
+        console.log(searchUsers)
+            const token =  jwtGenerator(searchUsers.parent_user_id, searchUsers.family_id)
             res.json({token}) 
       })
       .catch(next);
